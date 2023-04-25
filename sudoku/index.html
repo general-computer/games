@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku</title>
+    <style>
+        /* Add your custom CSS styles here */
+    </style>
+</head>
+<body>
+    <h1>Sudoku</h1>
+    <div id="sudoku-grid">
+        <!-- The Sudoku grid will be generated here -->
+    </div>
+    <button id="reset-button">Reset</button>
+    <button id="new-game-button">New Game</button>
+    <script>
+    function createBoard() {
+    const board = new Array(9);
+    for (let i = 0; i < 9; i++) {
+        board[i] = new Array(9).fill(0);
+    }
+    return board;
+}
+
+function isValid(board, row, col, num) {
+    for (let i = 0; i < 9; i++) {
+        if (board[row][i] === num || board[i][col] === num) {
+            return false;
+        }
+    }
+
+    const startRow = row - row % 3;
+    const startCol = col - col % 3;
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            if (board[i + startRow][j + startCol] === num) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+function solveSudoku(board, row, col) {
+    if (row === 9) {
+        return true;
+    }
+
+    if (col === 9) {
+        return solveSudoku(board, row + 1, 0);
+    }
+
+    if (board[row][col] !== 0) {
+        return solveSudoku(board, row, col + 1);
+    }
+
+    for (let num = 1; num <= 9; num++) {
+        if (isValid(board, row, col, num)) {
+            board[row][col] = num;
+
+            if (solveSudoku(board, row, col + 1)) {
+                return true;
+            }
+
+            board[row][col] = 0;
+        }
+    }
+
+    return false;
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+function generatePuzzle(board) {
+    // Fill diagonal blocks
+    for (let block = 0; block < 3; block++) {
+        const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        shuffleArray(numbers);
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                board[block * 3 + i][block * 3 + j] = numbers.pop();
+            }
+        }
+    }
+
+    // Solve the Sudoku to generate a full grid
+    solveSudoku(board, 0, 0);
+
+    // Remove some numbers to create the puzzle
+    const removedCells = 20; // Adjust this value to change the puzzle difficulty
+    let removed = 0;
+    while (removed < removedCells) {
+        const row = Math.floor(Math.random() * 9);
+        const col = Math.floor(Math.random() * 9);
+        if (board[row][col] !== 0) {
+            board[row][col] = 0;
+            removed++;
+        }
+    }
+}
+
+
+function renderBoard(board) {
+    const grid = document.getElementById('sudoku-grid');
+    grid.innerHTML = '';
+    for (let row = 0; row < 9; row++) {
+        for (let col = 0; col < 9; col++) {
+            const cell = document.createElement('input');
+            cell.type = 'text';
+            cell.maxLength = 1;
+            cell.value = board[row][col] === 0 ? '' : board[row][col];
+            cell.dataset.row = row;
+            cell.dataset.col = col;
+            cell.oninput = handleInput;
+            grid.appendChild(cell);
+        }
+        if (row % 3 === 2) {
+            grid.appendChild(document.createElement('br'));
+        }
+    }
+}
+
+function handleInput(event) {
+    const row = parseInt(event.target.dataset.row);
+    const col = parseInt(event.target.dataset.col);
+    const value = parseInt(event.target.value) || 0;
+    board[row][col] = value;
+}
+
+function resetBoard() {
+    renderBoard(board);
+}
+
+function newGame() {
+    generatePuzzle(board);
+    renderBoard(board);
+}
+
+document.getElementById('reset-button').onclick = resetBoard;
+document.getElementById('new-game-button').onclick = newGame;
+
+const board = createBoard();
+newGame();
+
+    </script>
+</body>
+</html>
+
