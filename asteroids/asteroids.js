@@ -88,7 +88,10 @@ function rotate(angle) {
 }
 
 function circleCollision(obj1, obj2) {
-  return distanceBetween(obj1.x, obj1.y, obj2.x, obj2.y) < obj1.radius + obj2.radius;
+  let dx = obj1.x - obj2.x;
+  let dy = obj1.y - obj2.y;
+  let distance = Math.sqrt(dx * dx + dy * dy);
+  return distance < obj1.radius + obj2.radius;
 }
 
 function createBullet(x, y, angle) {
@@ -98,6 +101,7 @@ function createBullet(x, y, angle) {
     xv: bulletSpeed * Math.cos(angle),
     yv: -bulletSpeed * Math.sin(angle),
     age: 0,
+    radius: 2,
   };
 }
 
