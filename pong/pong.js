@@ -37,16 +37,22 @@ function drawNet() {
     ctx.setLineDash([]);
 }
 function movePaddles() {
-    if (leftPaddleY + PADDLE_SPEED < ballY && leftPaddleY + PADDLE_HEIGHT > canvas.height / 2) {
-        leftPaddleY += PADDLE_SPEED;
-    } else if (leftPaddleY - PADDLE_SPEED > ballY && leftPaddleY < canvas.height / 2) {
-        leftPaddleY -= PADDLE_SPEED;
+    // Left Paddle AI
+    if (ballSpeedX < 0) {
+        if (leftPaddleY + PADDLE_HEIGHT / 2 < ballY - 20) {
+            leftPaddleY += PADDLE_SPEED;
+        } else if (leftPaddleY + PADDLE_HEIGHT / 2 > ballY + 20) {
+            leftPaddleY -= PADDLE_SPEED;
+        }
     }
 
-    if (rightPaddleY + PADDLE_SPEED < ballY && rightPaddleY + PADDLE_HEIGHT > canvas.height / 2) {
-        rightPaddleY += PADDLE_SPEED;
-    } else if (rightPaddleY - PADDLE_SPEED > ballY && rightPaddleY < canvas.height / 2) {
-        rightPaddleY -= PADDLE_SPEED;
+    // Right Paddle AI
+    if (ballSpeedX > 0) {
+        if (rightPaddleY + PADDLE_HEIGHT / 2 < ballY - 20) {
+            rightPaddleY += PADDLE_SPEED;
+        } else if (rightPaddleY + PADDLE_HEIGHT / 2 > ballY + 20) {
+            rightPaddleY -= PADDLE_SPEED;
+        }
     }
 }
 
