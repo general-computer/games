@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poker Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-container">
+    <div id="player-container">
+      <div class="player" id="player0">
+        <h3>Player 1</h3>
+        <p>Stack: <span id="player0-stack">1000</span></p>
+        <p>Bet: <span id="player0-bet">0</span></p>
+        <div class="folded" id="player0-folded">Folded</div>
+        <div class="cards">
+          <img class="card" src="https://via.placeholder.com/50x80.png?text=Card1" alt="Card 1">
+          <img class="card" src="https://via.placeholder.com/50x80.png?text=Card2" alt="Card 2">
+        </div>
+      </div>
+      <div class="player" id="player1">
+        <h3>Player 2</h3>
+        <p>Stack: <span id="player1-stack">1000</span></p>
+        <p>Bet: <span id="player1-bet">0</span></p>
+        <div class="folded" id="player1-folded">Folded</div>
+        <div class="cards">
+          <img class="card" src="https://via.placeholder.com/50x80.png?text=Card1" alt="Card 1">
+          <img class="card" src="https://via.placeholder.com/50x80.png?text=Card2" alt="Card 2">
+        </div>
+      </div>      
+    </div>
+    <div id="pot-container">
+      <p>Pot: <span id="pot">0</span></p>
+    </div>
+    <div id="controls">
+      <button onclick="performPlayerAction('bet', currentPlayer, 100)">Bet 100</button>
+      <button onclick="performPlayerAction('call', currentPlayer)">Call</button>
+      <button onclick="performPlayerAction('all-in', currentPlayer)">All-in</button>
+      <button onclick="performPlayerAction('fold', currentPlayer)">Fold</button>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
+

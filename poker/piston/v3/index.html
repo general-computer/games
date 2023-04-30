@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poker Odds Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Poker Odds Calculator</h1>
+    <div id="cards-container">
+        <div id="hand-cards">
+            <span id="card1">??</span>
+            <span id="card2">??</span>
+        </div>
+        <div id="board-cards">
+            <span id="flop1">??</span>
+            <span id="flop2">??</span>
+            <span id="flop3">??</span>
+            <span id="turn">??</span>
+            <span id="river">??</span>
+        </div>
+    </div>
+    <div id="inputs-container">
+        <label for="pot-size">Pot Size:</label>
+        <input type="number" id="pot-size" min="0">
+        <label for="bet-size">Bet Size:</label>
+        <input type="number" id="bet-size" min="0">
+        <button id="calculate-btn">Calculate Odds</button>
+    </div>
+    <div id="results-container">
+        <p id="results"></p>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
+
