@@ -8,7 +8,13 @@
 </head>
 <body>
     <h1>Poker Odds Calculator</h1>
-    <div id="board"></div>
+    <div id="board">
+        <div class="card">
+            <span class="rank">A</span>
+            <span class="suit suit-hearts">♥</span>
+        </div>
+        
+    </div>
     <div id="pot">Pot: 0</div>
     <div id="players">
         <div id="player0" class="player">
@@ -24,7 +30,6 @@
             <div id="player2Bet">Bet: 0</div>
         </div>
     </div>
-    <div id="players"></div>
     <div id="actions">
         <input type="range" id="betRange" min="1" max="100">
         <button id="betButton">Bet</button>

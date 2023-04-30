@@ -163,7 +163,7 @@ function createCard(rank, suit) {
 
 function createDeck() {
     const suits = ['hearts', 'diamonds', 'clubs', 'spades'];
-    const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+    const ranks = [2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A'];
     let deck = [];
 
     for (const suit of suits) {
@@ -208,8 +208,15 @@ function dealCards(deck, numPlayers) {
 
 // UI update functions
 function displayCard(card) {
-    return `${card.rank}${card.suit[0].toUpperCase()}`;
+    const suitSymbols = {
+        hearts: '♥',
+        diamonds: '♦',
+        clubs: '♣',
+        spades: '♠',
+    };
+    return `${card.rank}${suitSymbols[card.suit]}`;
 }
+
 
 function displayBoard(board) {
     const boardElement = document.getElementById('board');
@@ -289,8 +296,39 @@ function calculateOdds(players, board) {
 function updateUI(players, board, odds) {
     displayBoard(board);
     displayPlayers(players);
-    // TODO: Display odds and other game state information
 }
+
+function displayPlayers() {
+    const playersContainer = document.getElementById('players');
+    playersContainer.innerHTML = ''; // Clear the existing players
+
+    for (let i = 0; i < 3; i++) {
+        const playerElement = document.createElement('div');
+        playerElement.id = `player${i}`;
+        playerElement.classList.add('player');
+
+        if (i === currentPlayer) {
+            playerElement.classList.add('currentPlayer');
+        }
+
+        const stackElement = document.createElement('div');
+        stackElement.id = `player${i}Stack`;
+        stackElement.textContent = `Stack: ${playerStacks[i]}`;
+        playerElement.appendChild(stackElement);
+
+        const betElement = document.createElement('div');
+        betElement.id = `player${i}Bet`;
+        betElement.textContent = `Bet: ${playerBets[i]}`;
+        playerElement.appendChild(betElement);
+
+        const cardsElement = document.createElement('div');
+        cardsElement.id = `player${i}Cards`;
+        playerElement.appendChild(cardsElement);
+
+        playersContainer.appendChild(playerElement);
+    }
+}
+
 function evaluateHand(cards) {
     const handRanks = getHandRanks(cards);
     const isFlush = hasFlush(cards);

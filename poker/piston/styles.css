@@ -15,9 +15,39 @@ h1 {
     background-color: #a3d9ff;
 }
 
-#board,
+.card {
+    display: inline-block;
+    width: 50px;
+    height: 70px;
+    line-height: 70px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    background-color: white;
+    color: black;
+    margin: 2px;
+}
 
-#players {
+.card.suit-hearts,
+.card.suit-diamonds {
+    color: red;
+}
+
+.card.rank {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.card.suit {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+#board, #players {
     display: flex;
     justify-content: center;
     padding: 20px;
