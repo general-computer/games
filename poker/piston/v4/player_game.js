@@ -1,4 +1,3 @@
-<script>
 class Player {
     constructor(deck) {
         this.hand = [deck.deal(), deck.deal()];
@@ -62,5 +61,4 @@ class Game {
 }
 
 let game = new Game(3);
-</script>
 

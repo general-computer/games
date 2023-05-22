@@ -1,4 +1,3 @@
-<script>
 class Card {
     constructor(suit, value) {
         this.suit = suit;
@@ -44,5 +43,3 @@ class Deck {
 }
 
 let deck = new Deck();
-</script>
-

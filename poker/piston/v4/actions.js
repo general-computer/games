@@ -1,4 +1,3 @@
-<script>
 // Functions to perform actions and update the UI
 function bet() {
     const player = game.players[0];
@@ -38,5 +37,4 @@ updateUI();
 document.getElementById('bet-button').addEventListener('click', bet);
 document.getElementById('call-button').addEventListener('click', call);
 document.getElementById('fold-button').addEventListener('click', fold);
-</script>
 
