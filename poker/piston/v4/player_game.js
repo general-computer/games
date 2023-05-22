@@ -44,6 +44,27 @@ class Deck {
 
 let deck = new Deck();
 
+function getHandRank(hand) {
+    const values = hand.map(card => card.value);
+    const suits = hand.map(card => card.suit);
+    values.sort((a, b) => b - a);
+
+    const isFlush = suits.every(suit => suit === suits[0]);
+    const isStraight = values.every((value, index) => index === 0 || value === values[index - 1] - 1);
+    const counts = Object.values(values.reduce((counts, value) => ({...counts, [value]: (counts[value] || 0) + 1}), {}));
+    counts.sort((a, b) => b - a);
+
+    if (isStraight && isFlush && values[0] === 14) return 10; // Royal flush
+    if (isStraight && isFlush) return 9; // Straight flush
+    if (counts[0] === 4) return 8; // Four of a kind
+    if (counts[0] === 3 && counts[1] === 2) return 7; // Full house
+    if (isFlush) return 6; // Flush
+    if (isStraight) return 5; // Straight
+    if (counts[0] === 3) return 4; // Three of a kind
+    if (counts[0] === 2 && counts[1] === 2) return 3; // Two pairs
+    if (counts[0] === 2) return 2; // One pair
+    return 1; // High card
+}
 
 class Player {
     constructor(deck) {
@@ -79,18 +100,19 @@ class Game {
         return (winningOdds * this.pot) - ((1 - winningOdds) * player.chips);
     }
 
-    calculateWinningOdds(player) {
-        // simplified calculation
-        const playerHandStrength = this.calculateHandStrength(player.hand);
-        let strongerHands = 0;
+    // Returns the hand ranking of a 5-card hand, higher numbers are better
 
-        for (let i = 1; i < this.players.length; i++) {
-            if (this.calculateHandStrength(this.players[i].hand) > playerHandStrength) {
-                strongerHands++;
-            }
-        }
 
-        return 1 - (strongerHands / (this.players.length - 1));
+    // Adjust calculateWinningOdds function to use getHandRank
+    calculateWinningOdds = function(player) {
+        const visibleCards = this.communityCards.concat(...this.players.map(player => player.hand));
+        const playerHand = player.hand.concat(this.communityCards);
+        const playerRank = getHandRank(playerHand);
+        const opponentRanks = this.players
+            .filter(opponent => opponent !== player)
+            .map(opponent => opponent.hand.concat(this.communityCards))
+            .map(getHandRank);
+        return opponentRanks.filter(rank => rank <= playerRank).length / opponentRanks.length;
     }
 
     calculateHandStrength(hand) {

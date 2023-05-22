@@ -21,10 +21,44 @@ function fold() {
     updateUI();
 }
 
+function reset() {
+    game = new Game(3);
+    updateUI();
+}
+
+// Helper function to convert a card suit to a Unicode character
+function getCardSymbol(suit) {
+    switch(suit) {
+        case 'Hearts':
+            return '♥️';
+        case 'Diamonds':
+            return '♦️';
+        case 'Clubs':
+            return '♣️';
+        case 'Spades':
+            return '♠️';
+        default:
+            return suit;
+    }
+}
+
+// Update the UI based on the current game state
 function updateUI() {
-    // Update the UI based on the current game state
-    document.getElementById('player-hand-section').innerText = `Your hand: ${game.players[0].hand.map(card => `${card.value} of ${card.suit}`).join(', ')}`;
-    document.getElementById('common-cards-section').innerText = `Common cards: ${game.communityCards.map(card => `${card.value} of ${card.suit}`).join(', ')}`;
+    // Update the player's hand display
+    let playerHandText = 'Your hand: ';
+    game.players[0].hand.forEach(card => {
+        playerHandText += `${card.value} ${getCardSymbol(card.suit)} `;
+    });
+    document.getElementById('player-hand-section').innerText = playerHandText;
+
+    // Update the common cards display
+    let commonCardsText = 'Common cards: ';
+    game.communityCards.forEach(card => {
+        commonCardsText += `${card.value} ${getCardSymbol(card.suit)} `;
+    });
+    document.getElementById('common-cards-section').innerText = commonCardsText;
+
+    // Update the odds and feedback sections
     document.getElementById('odds-section').innerText = `Current odds: ${game.calculateWinningOdds(game.players[0])}`;
     document.getElementById('feedback-section').innerText = `Pot odds: ${game.calculatePotOdds()}, Expected value: ${game.calculateExpectedValue(game.players[0])}`;
 }

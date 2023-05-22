@@ -3,6 +3,7 @@
     <head>
         <title>Poker Odds Calculator</title>
         <link rel="stylesheet" type="text/css" href="index.css">
+        <meta charset="UTF-8">
     </head>
     <body>
         <div id="player-hand-section">
@@ -22,11 +23,13 @@
             <input type="range" id="bet-slider" min="1" max="100" value="50">
             <button id="call-button">Call</button>
             <button id="fold-button">Fold</button>
+            <button id="reset-button">Reset</button>
         </div>
 
         <div id="feedback-section">
             <!-- Feedback will be displayed here -->
         </div>
+
 
         <script src="player_game.js"></script>
         <script src="actions.js"></script>
