@@ -1,0 +1,38 @@
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+    }
+    #player-hand-section, #common-cards-section {
+        display: flex;
+        justify-content: center;
+        margin: 1em;
+    }
+    #odds-section {
+        text-align: center;
+        margin: 1em;
+    }
+    #actions-section {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+        margin: 1em;
+    }
+    #feedback-section {
+        text-align: center;
+        margin: 1em;
+    }
+    button {
+        padding: 0.5em 1em;
+        font-size: 1em;
+        cursor: pointer;
+    }
+    #bet-slider {
+        width: 50%;
+    }
+</style>
+
