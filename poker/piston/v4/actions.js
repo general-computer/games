@@ -71,4 +71,5 @@ updateUI();
 document.getElementById('bet-button').addEventListener('click', bet);
 document.getElementById('call-button').addEventListener('click', call);
 document.getElementById('fold-button').addEventListener('click', fold);
+document.getElementById('reset-button').addEventListener('click', reset);
 
