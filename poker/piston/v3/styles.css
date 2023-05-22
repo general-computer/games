@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#cards-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+span {
+    display: inline-block;
+    width: 40px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    border: 2px solid #000;
+    border-radius: 4px;
+    margin: 4px;
+}
+
+#inputs-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+label, input, button {
+    margin: 0 8px;
+}
+
+#results-container {
+    text-align: center;
+}
+
